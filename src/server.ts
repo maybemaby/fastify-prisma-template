@@ -2,6 +2,7 @@ import helmet from "@fastify/helmet";
 import sensible from "@fastify/sensible";
 import { build } from "./app";
 import { config } from "./config/config";
+import { KnownError } from "./utils/errors";
 
 const app = build({
   logger: config[process.env.NODE_ENV ?? "production"].logger,
@@ -16,6 +17,16 @@ if (process.env.NODE_ENV !== "production") {
     return app.swagger();
   });
 }
+
+app.setErrorHandler(function (error, request, reply) {
+  if (error instanceof KnownError) {
+    this.log.error(error, "Expected error occurred");
+  } else {
+    this.log.error(error, "Unexpected error occurred");
+  }
+  reply.internalServerError();
+  process.exit(1);
+});
 
 app.listen(
   {

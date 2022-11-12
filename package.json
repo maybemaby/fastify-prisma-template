@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "dotenv -e .env -- ts-node ./src/server.ts",
     "format": "prettier ./src -c",
-    "test": "tap --ts -w"
+    "test": "tap --ts -w",
+    "build": "tsc",
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "author": "maybemaby",
   "license": "MIT",
