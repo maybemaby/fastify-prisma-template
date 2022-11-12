@@ -22,8 +22,6 @@ app.register(swagger, {
 });
 app.register(helmet);
 app.register(sensible);
-app.register(apiRouter, { prefix: "/api" });
-app.register(healthRoute);
 
 // Returns swagger spec JSON when not in production
 if (process.env.NODE_ENV !== "production") {
