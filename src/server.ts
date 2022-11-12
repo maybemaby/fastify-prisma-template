@@ -1,4 +1,3 @@
-import swagger from "@fastify/swagger";
 import helmet from "@fastify/helmet";
 import sensible from "@fastify/sensible";
 import { build } from "./app";
@@ -8,16 +7,6 @@ const app = build({
   logger: config[process.env.NODE_ENV ?? "production"].logger,
 });
 
-app.register(swagger, {
-  swagger: {
-    info: {
-      title: "Fastify Prisma Template",
-      description: "Swagger Spec for Fastify web API",
-      version: "0.1.0",
-    },
-    host: "localhost",
-  },
-});
 app.register(helmet);
 app.register(sensible);
 
