@@ -3,8 +3,6 @@ import helmet from "@fastify/helmet";
 import sensible from "@fastify/sensible";
 import { build } from "./app";
 import { config } from "./config/config";
-import { healthRoute } from "./routes/health";
-import { apiRouter } from "./routes/api";
 
 const app = build({
   logger: config[process.env.NODE_ENV ?? "production"].logger,
@@ -25,7 +23,7 @@ app.register(sensible);
 
 // Returns swagger spec JSON when not in production
 if (process.env.NODE_ENV !== "production") {
-  app.get("/spec", async (req, res) => {
+  app.get("/spec", async (_req, _res) => {
     return app.swagger();
   });
 }
@@ -34,7 +32,7 @@ app.listen(
   {
     port: 3000,
   },
-  (err, address) => {
+  (err, _address) => {
     if (err) {
       app.log.error(err);
       process.exit(1);

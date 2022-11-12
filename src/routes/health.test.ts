@@ -8,6 +8,7 @@ t.test("health endpoint", async (t) => {
     method: "GET",
     url: "/heartbeat",
   });
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const json = res.json();
   t.ok(res.statusCode >= 200);
 

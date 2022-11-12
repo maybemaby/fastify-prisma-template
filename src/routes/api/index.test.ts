@@ -11,6 +11,7 @@ t.test("api root", (t) => {
     });
 
     t.ok(res.statusCode >= 200);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     t.ok(res.json()["version"]);
   });
   t.end();

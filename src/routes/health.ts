@@ -1,7 +1,7 @@
-import { FastifyPluginAsync } from "fastify";
+import { FastifyPluginCallback } from "fastify";
 import { Type } from "@sinclair/typebox";
 
-export const healthRoute: FastifyPluginAsync = async (fastify, opts) => {
+export const healthRoute: FastifyPluginCallback = (fastify, _opts, done) => {
   fastify.get(
     "/heartbeat",
     {
@@ -23,4 +23,5 @@ export const healthRoute: FastifyPluginAsync = async (fastify, opts) => {
       };
     }
   );
+  done();
 };

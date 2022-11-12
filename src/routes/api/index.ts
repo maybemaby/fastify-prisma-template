@@ -1,7 +1,7 @@
 import { Type } from "@sinclair/typebox";
-import { FastifyPluginAsync } from "fastify";
+import { FastifyPluginCallback } from "fastify";
 
-export const apiRouter: FastifyPluginAsync = async (fastify, opts) => {
+export const apiRouter: FastifyPluginCallback = (fastify, opts, done) => {
   fastify.get(
     "/",
     {
@@ -22,4 +22,5 @@ export const apiRouter: FastifyPluginAsync = async (fastify, opts) => {
       return { version: "1" };
     }
   );
+  done();
 };

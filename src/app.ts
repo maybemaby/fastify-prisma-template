@@ -5,8 +5,8 @@ import { healthRoute } from "./routes/health";
 
 export function build(opts?: FastifyServerOptions) {
   const app = fastify(opts).withTypeProvider<TypeBoxTypeProvider>();
-  app.register(apiRouter, { prefix: "/api" });
-  app.register(healthRoute);
+  void app.register(apiRouter, { prefix: "/api" });
+  void app.register(healthRoute);
 
   return app;
 }
