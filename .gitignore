@@ -3,3 +3,5 @@ node_modules
 .env
 .env.*
 .nyc_output
+db.sqlite-journal
+*.sqlite
