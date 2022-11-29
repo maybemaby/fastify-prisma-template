@@ -4,6 +4,7 @@
   "description": "Template for a fastify-prisma web API",
   "main": "./src/server.ts",
   "scripts": {
+    "migrate:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "dev": "dotenv -e .env -- ts-node ./src/server.ts",
     "format": "prettier ./src -c",
     "test": "tap --ts -w",

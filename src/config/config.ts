@@ -5,7 +5,7 @@ interface IConfig {
 }
 
 export const config: Record<string, IConfig> = {
-  dev: {
+  development: {
     logger: {
       transport: {
         target: "pino-pretty",
@@ -30,5 +30,5 @@ export const config: Record<string, IConfig> = {
       level: "info",
     },
   },
-  test: { logger: false },
+  testing: { logger: false },
 };
