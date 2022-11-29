@@ -8,13 +8,18 @@ export function build(opts?: FastifyServerOptions) {
   const app = fastify(opts).withTypeProvider<TypeBoxTypeProvider>();
 
   app.register(swagger, {
-    swagger: {
+    openapi: {
       info: {
         title: "Fastify Prisma Template",
         description: "Swagger Spec for Fastify web API",
         version: "0.1.0",
       },
-      host: "localhost",
+      servers: [{ url: "http://localhost:5000" }],
+    },
+    refResolver: {
+      buildLocalReference(json, baseUri, fragment, i) {
+        return json.$id?.toString() || `def-${i}`;
+      },
     },
   });
   void app.register(apiRouter, { prefix: "/api" });
