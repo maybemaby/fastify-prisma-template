@@ -5,9 +5,15 @@
   "main": "./src/server.ts",
   "scripts": {
     "migrate:dev": "dotenv -e .env.dev -- prisma migrate dev",
+    "dev:db-up": "docker run --name pg-dev -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgresdev -p 5432:5432 postgres",
     "dev": "dotenv -e .env -- ts-node ./src/server.ts",
     "format": "prettier ./src -c",
-    "test": "tap --ts -w",
+    "test": "dotenv -e .env.test -- tap src/**/*.test.ts --ts",
+    "test:db-up": "docker run --name pg-test -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgrestest -p 5432:5432 postgres",
+    "test:db-push": "dotenv -e .env.test -- prisma db push",
+    "test:only": "dotenv -e .env.test -- tap --files=src/**/*.test.ts --ts --only",
+    "test:routes": "dotenv -e .env.test -- tap --files=**/routes/**/*.test.ts --ts",
+    "test:w": "dotenv -e .env.test -- tap --ts -w",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/server.js"
   },
